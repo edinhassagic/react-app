@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+const labelText = 'First name:';
+const style = {
+    backgroundColor: 'blue',
+    color: 'white'
+};
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+// Create a react component
+const App = () => {
+    return (
+        <div>
+    <div>
+        <label className='label' htmlFor='name'>{labelText}</label>
+        <input id='name' />
+        <button
+        style={style}>
+            Submit
+            </button>
     </div>
-  );
+        </div>
+    );
 }
 
 export default App;
