@@ -70,9 +70,11 @@ const del = () => {
                 onChange={changeHandler} />
             </div>
             <hr />
-            <div className='left'>
+            {id !== '0' && (
+                <div className='left'>
                 <button type='button' onClick={del}>DELETE</button>
             </div>
+            )}
             <div className='right'>
                 <button type='button' onClick={back}>BACK</button>
                 &nbsp;&nbsp;
