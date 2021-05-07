@@ -1,81 +1,104 @@
 import { useEffect, useState } from "react";
 import { insert, update, read, remove } from "../services/apiService";
 
-const Course = ({ match, history }) => {
+const Student = ({ match, history }) => {
   const [requiredMessage, setMessage] = useState("");
   const [id] = useState(match.params.id);
-  const [course, setCourse] = useState({
+  const [student, setStudent] = useState({
     _id: "0",
-    name: "",
-    points: 0,
+    firstName: "",
+    lastName: "",
+    yearOfBirth: 0,
+    address: "",
   });
 
   useEffect(() => {
     if (id !== "0") {
-      read("courses", id, (data) => {
-        if (data) setCourse(data);
+      read("students", id, (data) => {
+        if (data) setStudent(data);
       });
     }
   }, [id]);
 
   function changeHandler(e) {
-    setCourse({
-      ...course,
+    setStudent({
+      ...student,
       [e.target.name]: e.target.value,
     });
   }
 
   const back = () => {
-    history.push("/courses");
+    history.push("/students");
   };
 
   const save = () => {
-    if (!course.name || !course.points) {
+    if (!student.firstName || !student.lastName) {
       setMessage("This field is required");
     } else {
       if (id === "0") {
-        delete course._id;
-        insert("courses", course, (data) => {
-          if (data) return history.push("/courses");
+        delete student._id;
+        insert("students", student, (data) => {
+          if (data) return history.push("/students");
           console.log("There was an error during save data");
         });
       } else {
-        update("courses", id, course, (data) => {
-          if (data) return history.push("/courses");
+        update("students", id, student, (data) => {
+          if (data) return history.push("/students");
           console.log("There was an error during save data");
         });
       }
     }
   };
   const del = () => {
-    remove("courses", id, (data) => {
-      history.push("/courses");
+    remove("students", id, (data) => {
+      history.push("/students");
     });
   };
 
   return (
     <div className="container">
-      <h2>Course</h2>
+      <h2>Student</h2>
       <form className="input-form">
         <div style={{ margin: "12px 0" }}>
-          <label htmlFor="name">Course name</label>
+          <label htmlFor="name">First Name:</label>
           <input
             type="text"
-            name="name"
-            value={course.name}
+            name="firstName"
+            value={student.firstName}
             onChange={changeHandler}
           />
           <div className="msg"> {requiredMessage}</div>
         </div>
+
         <div style={{ margin: "12px 0" }}>
-          <label htmlFor="points">Course points</label>
+          <label htmlFor="lastName">Last Name:</label>
           <input
             type="text"
-            name="points"
-            value={course.points}
+            name="lastName"
+            value={student.lastName}
             onChange={changeHandler}
           />
           <div className="msg"> {requiredMessage}</div>
+        </div>
+
+        <div style={{ margin: "12px 0" }}>
+          <label htmlFor="yearOfBirth">Year of Birth:</label>
+          <input
+            type="text"
+            name="yearOfBirth"
+            value={student.yearOfBirth}
+            onChange={changeHandler}
+          />
+        </div>
+
+        <div style={{ margin: "12px 0" }}>
+          <label htmlFor="address">Address:</label>
+          <input
+            type="text"
+            name="address"
+            value={student.address}
+            onChange={changeHandler}
+          />
         </div>
         <hr />
         {id !== "0" && (
@@ -85,6 +108,7 @@ const Course = ({ match, history }) => {
             </button>
           </div>
         )}
+
         <div className="right">
           <button type="button" onClick={back}>
             BACK
@@ -99,4 +123,4 @@ const Course = ({ match, history }) => {
   );
 };
 
-export default Course;
+export default Student;

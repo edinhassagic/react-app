@@ -1,20 +1,20 @@
-import logo from '../assets/images/paragon.png'
-import Navigator from './Navigator';
+import logo from "../assets/images/paragon.png";
+import Navigator from "./Navigator";
 
 const AppHeader = () => {
-    return (
+  return (
     <header>
-        <div className='left'>
-        <img src={logo} alt='Logo' />
-        </div>
-        <div className='left'>
+      <div className="left">
+        <img src={logo} alt="Logo" />
+      </div>
+      <div className="left">
         <h2>My React App</h2>
-        </div>
-        <div className='right'>
-        <Navigator/>
-        </div>
-        
-        </header>);
-}
+      </div>
+      <div className="right">
+        <Navigator />
+      </div>
+    </header>
+  );
+};
 
 export default AppHeader;
